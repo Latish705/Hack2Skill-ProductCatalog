@@ -29,10 +29,13 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    isAdmin: {
+    role: {
       type: Boolean,
       required: true,
       default: false,
+    },
+    refreshToken: {
+      type: String,
     },
   },
   { timestamps: true }
