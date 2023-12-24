@@ -7,12 +7,15 @@ import { uploadToCloudinary } from "../utils/uploadToCloundinary.js";
 export const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, contact } = req.body;
 
-  if (
-    [username, email, password, contact].some((field) => field.trim() === "")
-  ) {
+  // if (
+  //   [username, password, email, contact].some((field) => field.trim() === "")
+  // ) {
+  //   throw new ApiError(400, "All fields are required");
+  // }
+  console.log(username, email, password, contact);
+  if (!username || !email || !password || !contact) {
     throw new ApiError(400, "All fields are required");
   }
-
   const existingUser = await User.findOne({
     $or: [{ email }, { username }],
   });
@@ -54,4 +57,8 @@ export const registerUser = asyncHandler(async (req, res) => {
     message: "User registered successfully",
     createdUser,
   });
+});
+
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 });
