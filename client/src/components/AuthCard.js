@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const AuthCard = ({ onSubmit, actionType }) => {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = React.useState({
         userName: '',
         email: '',
@@ -34,7 +38,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
     return (
         <div className='flex justify-center items-center h-screen bg-slate-50'>
             <form onSubmit={handleSubmit}
-                className='p-8 bg-white rounded-2xl flex flex-col gap-4'
+                className='p-8 bg-white rounded-2xl flex flex-col gap-4 shadow-lg'
             >
 
                 <div className=' text-gray-500'>
@@ -50,32 +54,40 @@ const AuthCard = ({ onSubmit, actionType }) => {
                     />
                 </div>
 
-                <div className=' text-gray-500'>
-                    <label htmlFor='email'>Email</label>
-                    <input
-                        className='h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black'
-                        type='email'
-                        id='email'
-                        name='email'
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                {   
+                    actionType !== 'Login' &&
+                    <div className=' text-gray-500'>
+                        <label htmlFor='email'>Email</label>
+                        <input
+                            className='h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black'
+                            type='email'
+                            id='email'
+                            name='email'
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div> 
+                }
 
-                <div className=' text-gray-500'>
-                    <label htmlFor='contact'>Contact</label>
-                    <input
-                        className='h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black'
-                        type='tel'
-                        id='number'
-                        name='contactNumber'
-                        value={formData.contactNumber}
-                        onChange={handleChange}
-                        pattern="[0-9]*"
-                        required
-                    />
-                </div>
+                {
+                    actionType !== 'Login' &&
+                    <div className=' text-gray-500'>
+                        <label htmlFor='contact'>Contact</label>
+                        <input
+                            className='h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black'
+                            type='tel'
+                            id='number'
+                            name='contactNumber'
+                            value={formData.contactNumber}
+                            onChange={handleChange}
+                            pattern="[0-9]*"
+                            required
+                        />
+                    </div>
+                }
+
+                
 
                 <div className=' text-gray-500'>
                     <label htmlFor='password'>Password</label>
@@ -90,6 +102,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
                     />
                 </div>
 
+                { actionType !== 'Login' &&  
                 <div className=' text-gray-500'>
                     <label htmlFor='confirmPassword'>Confirm password</label>
                     <input
@@ -102,7 +115,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
                         required
                     />
                     {passwordError && <p className='text-red-500'>{passwordError}</p>}
-                </div>
+                </div> } {/* if actiontype login then element is hidden */}
 
                 <div>
                     <Button type='submit'>
@@ -110,6 +123,29 @@ const AuthCard = ({ onSubmit, actionType }) => {
                     </Button> 
                 </div>
 
+                <div className='text-sm'>
+                    { actionType !== 'Login' &&
+                        <p>
+                            Already have an accout? 
+                            <button className='text-blue-500 underline ml-1'
+                                onClick={()=>{navigate('/Login')}}
+                            >
+                                Login
+                            </button>
+                        </p>
+                    }
+                    {
+                        actionType === 'Login' &&
+                        <p className='text-sm'>
+                            New Here?
+                            <button className='text-blue-500 underline ml-1'
+                                onClick={()=>{navigate('/')}}
+                            >
+                                Sign up
+                            </button>
+                        </p>
+                    }
+                </div>
             </form>
         </div>
     );
