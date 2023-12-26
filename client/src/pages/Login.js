@@ -1,6 +1,7 @@
 import AuthCard from "../components/AuthCard";
 import axios from "axios";
 import { loginValidation } from "../actions/authValidation";
+import Cookie from "js-cookie";
 
 export default function Login() {
   const handleLogin = async (formData) => {
@@ -14,7 +15,9 @@ export default function Login() {
           formData
         );
         console.log(response);
-        const { accessToken, refreshToken, user, message } = response.data;
+        const { user, message } = response.data;
+        const accessToken = Cookie.get("accessToken");
+        const refreshToken = Cookie.get("refreshToken");
 
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
