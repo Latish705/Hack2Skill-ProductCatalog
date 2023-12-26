@@ -25,8 +25,9 @@ export const signupValidation = (formData) => {
 export const loginValidation = (formData) => {
   try {
     const dataValidated = loginSchema.parse(formData);
-    return {message: "validation passed", info: dataValidated};
-  } catch (error) {
-    return {message: "validation failded", error: error};
 
+    return { message: "validation passed", info: dataValidated };
+  } catch (error) {
+    return { message: "validation failed", error: error };
+  }
 };
