@@ -15,7 +15,8 @@ const AuthCard = ({ onSubmit, actionType }) => {
     avatar: null,
   });
 
-  const [passwordError, setPasswordError] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState(""); // use to confirm password
+  const [contactError, setContactError] = React.useState(""); // state for contact error
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -35,8 +36,11 @@ const AuthCard = ({ onSubmit, actionType }) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match");
-    } else {
+    } else if (formData.contact.length !== 10) {
       setPasswordError("");
+      setContactError('Contact must contain 10 digits');
+    } else {
+      setContactError("");
       onSubmit(formData);
     }
   };
@@ -85,6 +89,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
               pattern="[0-9]*"
               required
             />
+            {contactError && <p className="text-red-500">{contactError}</p>}
           </div>
         )}
         <div className=" text-gray-500">
@@ -114,6 +119,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
               />
               {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
+
             <div className="text-gray-500">
               <label htmlFor="avatar">Avatar</label>
               <input
@@ -124,10 +130,9 @@ const AuthCard = ({ onSubmit, actionType }) => {
                 onChange={handleFileChange}
                 required
               />
-              {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
           </>
-        )}{" "}
+        )}
         {/* if actiontype login then element is hidden */}
         <div>
           <Button type="submit">{actionType}</Button>

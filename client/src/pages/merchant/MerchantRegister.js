@@ -1,21 +1,34 @@
 import React from "react";
 import AuthCard from "../../components/AuthCard";
 import axios from "axios";
+import { signupValidation } from "../../actions/authValidation";
+import { Form } from "react-router-dom";
 
 export default function MerchantAuth() {
-  const handleSubmit = async (formData) => {
-    console.log("submit function here", formData);
-    const response = await axios.post(
-      "http://localhost:8080/api/v1/auth/register",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data", // Important for file uploads
-        },
+  
+  const handleSubmit = async (FormData) => {
+    const validation = signupValidation(FormData);
+    
+    if (validation.message === "validation passed") {
+      try {
+        const response = await axios.post(
+          "https://localhost:8080/api/v1/auth/register",
+          FormData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // for file uploads
+            },
+          },
+        );
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+        throw new Error('server error, plz try again later',);
       }
-    );
-    console.log(response);
-  };
+    } else {
+      console.log('error', validation)
+    }
+  }
 
   return (
     <div>
