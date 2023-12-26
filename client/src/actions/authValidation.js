@@ -27,6 +27,6 @@ export const loginValidation = (formData) => {
     const dataValidated = loginSchema.parse(formData);
     return { message: "validation passed", dataValidated };
   } catch (error) {
-    return { message: "validation failded", dataValidated };
+    return { message: "validation failded", error: error };
   }
 };
