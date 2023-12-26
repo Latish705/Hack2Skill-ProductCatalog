@@ -12,6 +12,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
     contact: "",
     password: "",
     confirmPassword: "",
+    avatar: null,
   });
 
   const [passwordError, setPasswordError] = React.useState("");
@@ -23,9 +24,15 @@ const AuthCard = ({ onSubmit, actionType }) => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.files[0], // Assuming single file upload
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (formData.password !== formData.confirmPassword) {
       setPasswordError("Passwords do not match");
     } else {
@@ -33,7 +40,6 @@ const AuthCard = ({ onSubmit, actionType }) => {
       onSubmit(formData);
     }
   };
-
   return (
     <div className="flex justify-center items-center h-screen bg-slate-50">
       <form
@@ -94,19 +100,33 @@ const AuthCard = ({ onSubmit, actionType }) => {
           />
         </div>
         {actionType !== "Login" && (
-          <div className=" text-gray-500">
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <input
-              className="h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black"
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-            {passwordError && <p className="text-red-500">{passwordError}</p>}
-          </div>
+          <>
+            <div className=" text-gray-500">
+              <label htmlFor="confirmPassword">Confirm password</label>
+              <input
+                className="h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black"
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              {passwordError && <p className="text-red-500">{passwordError}</p>}
+            </div>
+            <div className="text-gray-500">
+              <label htmlFor="avatar">Avatar</label>
+              <input
+                className="h-9 border border-gray-300 w-full rounded-md mt-1 px-2 text-black"
+                type="file"
+                id="avatar"
+                name="avatar"
+                onChange={handleFileChange}
+                required
+              />
+              {passwordError && <p className="text-red-500">{passwordError}</p>}
+            </div>
+          </>
         )}{" "}
         {/* if actiontype login then element is hidden */}
         <div>
