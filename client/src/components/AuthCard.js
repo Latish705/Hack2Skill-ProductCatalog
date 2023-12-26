@@ -38,7 +38,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
       setPasswordError("Passwords do not match");
     } else if (formData.contact.length !== 10) {
       setPasswordError("");
-      setContactError('Contact must contain 10 digits');
+      setContactError("Contact must contain 10 digits");
     } else {
       setContactError("");
       onSubmit(formData);

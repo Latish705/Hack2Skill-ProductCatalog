@@ -6,7 +6,8 @@ export default function Login() {
   const handleLogin = async (formData) => {
     const validation = loginValidation(formData);
 
-    if (validation === "validation passed") {
+    if (validation.message === "validation passed") {
+      console.log(validation.message);
       try {
         const response = await axios.post(
           "http://localhost:8080/api/v1/auth/login",
