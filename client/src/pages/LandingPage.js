@@ -8,9 +8,18 @@ export default function LandingPage() {
 
     return (
         <div>
-
-            <Button onClick={()=>{navigate('/buyerSignup')}}>Buyer</Button>
-            <Button onClick={()=>{navigate('/Register')}}>Merchant</Button>
+            <section>
+                <div></div>
+                <header>
+                    <h1>
+                        Commerce for everyone
+                    </h1>
+                    <p>
+                        A one stop solution for buyers and merchants
+                    </p>
+                    <Button>Explore</Button>
+                </header>
+            </section>
         </div>
     )
 }
