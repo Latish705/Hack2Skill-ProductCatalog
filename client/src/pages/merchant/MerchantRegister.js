@@ -11,7 +11,7 @@ export default function MerchantAuth() {
     if (validation.message === "validation passed") {
       try {
         const response = await axios.post(
-          "https://localhost:8080/api/v1/auth/register",
+          "http://localhost:8080/api/v1/auth/register",
           FormData,
           {
             headers: {
