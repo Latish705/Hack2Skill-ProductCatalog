@@ -45,7 +45,7 @@ const AuthCard = ({ onSubmit, actionType }) => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-50">
+    <div className="flex justify-center items-center min-h-screen bg-slate-50 overflow-visible">
       <form
         onSubmit={handleSubmit}
         className="p-8 bg-white rounded-2xl flex flex-col gap-4 shadow-lg"
