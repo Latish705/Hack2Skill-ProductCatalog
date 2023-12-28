@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const Button = ({ onClick, type, disabled, children }) => {
   return (
     <button
-    className='flex items-center justify-center py-2 px-5 m-1 rounded-2xl text-white font-semibold bg-blue-500 ' 
+    className='flex items-center justify-center py-3 px-5 m-1 rounded-2xl text-white font-semibold bg-Blue ' 
       onClick={onClick}
       type={type}
       disabled={disabled}
@@ -29,3 +29,4 @@ Button.defaultProps = {
 };
 
 export default Button;
+  
