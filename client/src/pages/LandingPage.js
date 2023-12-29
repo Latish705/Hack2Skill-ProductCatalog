@@ -5,6 +5,13 @@ import { useNavigate } from 'react-router-dom';
 export default function LandingPage() {
 
     const navigate = useNavigate();
+    const exploreAsRef = React.useRef(null);
+
+    const handleExplore = ()=>{
+        if (exploreAsRef.current) {
+            exploreAsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     return (
         <div className='overflow-visible'>
@@ -20,7 +27,7 @@ export default function LandingPage() {
                         A one stop solution for buyers <br/> and merchants
                     </p>
                     <div className='popS text-xl mt-6'>
-                        <Button>Explore</Button>
+                        <Button onClick={handleExplore}>Explore</Button>
                     </div>
                 </header>
             </section>
@@ -36,11 +43,11 @@ export default function LandingPage() {
                     </div>
                 </div>
 
-                <div className='flex items-center flex-col gap-6 mt-36'>
+                <div className='flex items-center flex-col gap-6 mt-36' ref={exploreAsRef}>
                     <h2 className='popS text-[69px]' >Explore As</h2>
                     <div className='flex gap-8 text-2xl'>
-                        <Button>Buyer</Button>
-                        <Button>Seller</Button>
+                        <Button onClick={()=>{navigate('/BuyerSignup')}}>Buyer</Button>
+                        <Button onClick={()=>{navigate('/Register')}}>Seller</Button>
                     </div>
                 </div>
             </section>
